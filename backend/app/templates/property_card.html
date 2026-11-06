@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="{{ lang }}">
+<head>
+<meta charset="utf-8" />
+<title>{{ property.title }}</title>
+<style>
+  @page { size: A4; margin: 18mm; }
+  body { font-family: 'Helvetica', sans-serif; color: #1f2937; font-size: 11pt; }
+  h1 { color: #0f172a; margin: 0 0 4mm 0; font-size: 22pt; }
+  h2 { color: #334155; font-size: 13pt; margin: 8mm 0 3mm 0; border-bottom: 1px solid #e5e7eb; padding-bottom: 2mm; }
+  .agency { font-size: 9pt; color: #64748b; margin-bottom: 6mm; }
+  .lead-greeting { background: #eff6ff; border-left: 3px solid #2563eb; padding: 4mm; margin: 4mm 0; font-size: 11pt; }
+  .hero { width: 100%; height: 70mm; object-fit: cover; border-radius: 2mm; margin: 4mm 0; }
+  .price { font-size: 18pt; font-weight: bold; color: #0f172a; }
+  .specs { display: flex; gap: 6mm; flex-wrap: wrap; margin: 3mm 0; }
+  .spec { background: #f1f5f9; padding: 2mm 4mm; border-radius: 1mm; font-size: 10pt; }
+  ul { margin: 0; padding-left: 5mm; }
+  li { margin-bottom: 1.5mm; }
+  .why { background: #f0fdf4; border-left: 3px solid #16a34a; padding: 4mm; margin: 4mm 0; }
+  .footer { margin-top: 10mm; font-size: 9pt; color: #94a3b8; text-align: center; }
+</style>
+</head>
+<body>
+  <div class="agency">{{ agency.name }}</div>
+  <h1>{{ property.title }}</h1>
+
+  {% if lead.first_name %}
+  <div class="lead-greeting">
+    Hola {{ lead.first_name }}, te enviamos los detalles de esta propiedad pensando específicamente en lo que nos comentaste.
+  </div>
+  {% endif %}
+
+  {% if property.image_url %}
+    <img class="hero" src="{{ property.image_url }}" alt="" />
+  {% endif %}
+
+  <div class="price">{{ property.price_eur }} €{% if property.operation == 'rent' %} /mes{% endif %}</div>
+  <div style="color:#64748b">{{ property.address }} — {{ property.neighborhood or property.city }}, {{ property.city }}</div>
+
+  <div class="specs">
+    {% if property.bedrooms is not none %}<div class="spec">{{ property.bedrooms }} hab</div>{% endif %}
+    {% if property.bathrooms is not none %}<div class="spec">{{ property.bathrooms }} baños</div>{% endif %}
+    {% if property.area_sqm %}<div class="spec">{{ property.area_sqm }} m²</div>{% endif %}
+    {% if property.floor %}<div class="spec">Planta {{ property.floor }}</div>{% endif %}
+    {% if property.energy_rating %}<div class="spec">EPC {{ property.energy_rating }}</div>{% endif %}
+  </div>
+
+  {% if reasons %}
+  <h2>Por qué te puede encajar</h2>
+  <div class="why">
+    <ul>
+      {% for r in reasons %}<li>{{ r }}</li>{% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+
+  <h2>Características</h2>
+  <ul>
+    {% if property.has_elevator %}<li>Ascensor</li>{% endif %}
+    {% if property.has_parking %}<li>Plaza de garaje</li>{% endif %}
+    {% if property.has_terrace %}<li>Terraza</li>{% endif %}
+    {% if property.has_pool %}<li>Piscina</li>{% endif %}
+    {% if property.has_ac %}<li>Aire acondicionado</li>{% endif %}
+    {% if property.has_heating %}<li>Calefacción</li>{% endif %}
+    {% if property.furnished %}<li>Amueblado</li>{% endif %}
+    {% if property.pet_friendly %}<li>Admite mascotas</li>{% endif %}
+  </ul>
+
+  {% if property.description %}
+  <h2>Descripción</h2>
+  <p>{{ property.description }}</p>
+  {% endif %}
+
+  {% if mortgage %}
+  <h2>Estimación de financiación (informativa)</h2>
+  <p>
+    Con una entrada del {{ mortgage.down_payment_pct }}% y {{ mortgage.years }} años a un
+    tipo del {{ mortgage.annual_rate_pct }}% anual, la cuota mensual estimada sería de
+    aproximadamente <strong>{{ mortgage.monthly_payment_eur }} €</strong>.
+  </p>
+  {% endif %}
+
+  <div class="footer">
+    Documento generado por {{ agency.name }} para {{ lead.first_name or 'el cliente' }} —
+    referencia interna {{ property.reference }}.
+  </div>
+</body>
+</html>

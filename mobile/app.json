@@ -1,0 +1,62 @@
+{
+  "expo": {
+    "name": "selai",
+    "slug": "selai",
+    "version": "1.1.0",
+    "orientation": "portrait",
+    "scheme": "selai",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "es.selai.mobile",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
+    },
+    "android": {
+      "package": "es.selai.mobile",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#4A4FD9"
+      }
+    },
+    "plugins": [
+      "expo-router",
+      "expo-secure-store",
+      "expo-asset",
+      "expo-notifications",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/icon.png",
+          "imageWidth": 160,
+          "resizeMode": "contain",
+          "backgroundColor": "#4A4FD9"
+        }
+      ],
+      "expo-font",
+      [
+        "expo-local-authentication",
+        {
+          "faceIDPermission": "selai usa Face ID para desbloquear la app cuando activas el bloqueo biométrico, de forma que las conversaciones y los datos de tus clientes no queden a la vista si alguien más coge tu teléfono."
+        }
+      ],
+      [
+        "expo-audio",
+        {
+          "microphonePermission": "selai usa el micrófono para que puedas grabar una nota de voz al terminar una visita y que quede guardada en la ficha de ese cliente.",
+          "recordAudioAndroid": true,
+          "enableBackgroundRecording": false,
+          "enableBackgroundPlayback": false
+        }
+      ]
+    ],
+    "extra": {
+      "router": {}
+    },
+    "runtimeVersion": {
+      "policy": "fingerprint"
+    }
+  }
+}

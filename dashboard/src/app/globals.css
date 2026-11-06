@@ -1,0 +1,151 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  *:focus-visible {
+    outline: 2px solid #5b61f0;
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+  ::selection {
+    background: #5b61f0;
+    color: white;
+  }
+}
+
+@layer utilities {
+  /* Hero grid background — subtle dotted/lined grid with radial mask */
+  .grid-bg {
+    background-image:
+      linear-gradient(to right, rgba(11, 13, 23, 0.045) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(11, 13, 23, 0.045) 1px, transparent 1px);
+    background-size: 56px 56px;
+    -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, black 30%, transparent 80%);
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, black 30%, transparent 80%);
+  }
+
+  /* Inline SVG noise — used in team avatars */
+  .noise {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.5'/></svg>");
+  }
+
+  /* Word-by-word stagger reveal helper used by StaggerWords */
+  .stagger > span {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(16px);
+    animation: rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  .stagger > span.space {
+    width: 0.28em;
+  }
+
+  /* Frosted-glass header on scroll */
+  .glass {
+    backdrop-filter: blur(14px) saturate(140%);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+  }
+
+  /* Dotted connector line */
+  .dotted {
+    background-image: radial-gradient(circle, currentColor 1px, transparent 1.5px);
+    background-size: 10px 10px;
+  }
+
+  /* Typing dots for chat indicators */
+  .dot {
+    animation: typing 1.4s ease-in-out infinite;
+  }
+  .dot:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+  .dot:nth-child(3) {
+    animation-delay: 0.4s;
+  }
+
+  /* SVG path drawing — set on .draw, triggered by .in-view ancestor */
+  .draw {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    pathLength: 1;
+  }
+  .in-view .draw {
+    animation: draw 1.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  /* Logo strip ticker (continuous horizontal scroll right→left) */
+  .ticker {
+    animation: ticker 28s linear infinite;
+  }
+  /* Pause on hover so users can read names */
+  .ticker:hover {
+    animation-play-state: paused;
+  }
+
+  /* Tabular numerics for animated counters */
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Channel mockup floats — bigger amplitude so the cluster feels alive */
+  .float-1 {
+    animation: float-a 6s ease-in-out infinite;
+  }
+  .float-2 {
+    animation: float-b 7.5s ease-in-out infinite 0.6s;
+  }
+  .float-3 {
+    animation: float-a 7s ease-in-out infinite 0.3s reverse;
+  }
+  .float-4 {
+    animation: float-b 8s ease-in-out infinite 1s reverse;
+  }
+  @keyframes float-a {
+    0%, 100% { transform: translateY(0) rotate(-1deg); }
+    50% { transform: translateY(-14px) rotate(1deg); }
+  }
+  @keyframes float-b {
+    0%, 100% { transform: translateY(0) rotate(1deg); }
+    50% { transform: translateY(-12px) rotate(-1.5deg); }
+  }
+
+  /* Subtle grain on dark sections */
+  .grain {
+    position: relative;
+  }
+  .grain::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.06;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+    mix-blend-mode: overlay;
+  }
+
+  /* Hide scrollbars in the channel tabs row */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+
+  /* Edge fade for the logo ticker */
+  .mask-fade {
+    -webkit-mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+  }
+}
+
+/* Respect user motion preference everywhere */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

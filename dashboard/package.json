@@ -1,0 +1,40 @@
+{
+  "name": "realtor-ai-dashboard",
+  "version": "0.1.0",
+  "engines": {
+    "node": "24.x"
+  },
+  "private": true,
+  "allowScripts": {
+    "@sentry/cli": false,
+    "unrs-resolver": true
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint . --max-warnings=0",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@clerk/localizations": "^4.13.7",
+    "@clerk/nextjs": "^7.6.0",
+    "@sentry/nextjs": "^10.69.0",
+    "@vercel/analytics": "^2.0.1",
+    "next": "16.3.4",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "swr": "^2.2.5",
+    "tailwindcss": "^3.4.14"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/react": "19.2.18",
+    "@types/react-dom": "19.2.5",
+    "autoprefixer": "^10.4.20",
+    "eslint": "9.39.5",
+    "eslint-config-next": "16.3.4",
+    "postcss": "^8.4.47",
+    "typescript": "^5.6.3"
+  }
+}

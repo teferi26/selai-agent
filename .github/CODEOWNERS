@@ -1,0 +1,8 @@
+# Cualquier cambio necesita revisión del responsable del repositorio.
+* @teferi26
+
+# Las superficies con datos personales o despliegue quedan explícitas.
+/backend/app/core/ @teferi26
+/backend/app/legal/ @teferi26
+/.github/workflows/ @teferi26
+/infra/ @teferi26

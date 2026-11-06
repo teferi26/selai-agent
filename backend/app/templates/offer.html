@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<title>Oferta {{ offer.id }}</title>
+<style>
+  @page { size: A4; margin: 22mm; }
+  body { font-family: 'Helvetica', sans-serif; color: #111827; font-size: 11pt; line-height: 1.4; }
+  h1 { font-size: 18pt; margin-bottom: 2mm; }
+  h2 { font-size: 12pt; margin: 6mm 0 2mm; border-bottom: 1px solid #e5e7eb; padding-bottom: 1mm; }
+  table { width: 100%; border-collapse: collapse; margin: 3mm 0; }
+  td { padding: 2mm; border-bottom: 1px solid #f1f5f9; vertical-align: top; }
+  td.label { color: #64748b; width: 35%; }
+  .amount { font-size: 22pt; font-weight: bold; color: #0f172a; margin: 4mm 0; }
+  .footer { margin-top: 14mm; font-size: 9pt; color: #94a3b8; }
+  .signatures { margin-top: 18mm; display: flex; gap: 14mm; }
+  .sig { flex: 1; border-top: 1px solid #94a3b8; padding-top: 2mm; font-size: 9pt; color: #64748b; }
+</style>
+</head>
+<body>
+  <div style="text-align:right; font-size: 10pt; color: #64748b;">
+    {{ agency.name }}<br/>
+    Oferta nº {{ offer.short_id }} · {{ offer.created_at }}
+  </div>
+
+  <h1>Oferta de {{ "compra" if offer.operation == 'sale' else "alquiler" }}</h1>
+
+  <h2>Partes</h2>
+  <table>
+    <tr><td class="label">Comprador / arrendatario</td><td>{{ lead.full_name }}<br/>{{ lead.email or '' }} · {{ lead.phone_e164 or '' }}</td></tr>
+    <tr><td class="label">Inmueble</td><td>{{ property.title }} ({{ property.reference }})<br/>{{ property.address }} — {{ property.city }}</td></tr>
+  </table>
+
+  <h2>Importe ofertado</h2>
+  <div class="amount">{{ offer.amount_eur_fmt }} €{% if offer.operation == 'rent' %} /mes{% endif %}</div>
+
+  {% if offer.conditions %}
+  <h2>Condiciones</h2>
+  <p>{{ offer.conditions }}</p>
+  {% endif %}
+
+  {% if offer.valid_until %}
+  <h2>Validez</h2>
+  <p>Esta oferta es válida hasta el <strong>{{ offer.valid_until }}</strong>.</p>
+  {% endif %}
+
+  <div class="signatures">
+    <div class="sig">Firma del comprador<br/>{{ lead.full_name }}</div>
+    <div class="sig">Firma de la propiedad<br/>(pendiente)</div>
+  </div>
+
+  <div class="footer">
+    Documento generado por {{ agency.name }}. Esta oferta es vinculante para el oferente
+    en los términos descritos en este documento. La aceptación corresponde a la propiedad.
+  </div>
+</body>
+</html>

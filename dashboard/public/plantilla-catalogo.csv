@@ -1,0 +1,4 @@
+titulo;precio;ciudad;barrio;direccion;tipo;habitaciones;banos;m2;operacion;descripcion;referencia
+Piso luminoso junto al Mercado Central;185000;Alicante;Centro;Calle San Vicente 12, 3ºB;piso;3;2;95;venta;Piso reformado con cocina abierta, balcón a la calle y mucha luz natural todo el día. A dos minutos del Mercado Central y con tranvía en la puerta.;REF-001
+Chalet con piscina en urbanización tranquila;320000;San Juan de Alicante;La Font;Av. de la Costa Blanca 45;chalet;4;3;180;venta;Chalet independiente con jardín, piscina privada y garaje para dos coches, a 5 minutos de la playa de San Juan y con colegios cerca.;REF-002
+Ático con terraza y vistas al mar;950;Alicante;Playa de San Juan;Calle Holanda 8, 7ºA;atico;2;1;70;alquiler;Ático en alquiler por 950 €/mes con terraza de 20 m², vistas al mar y piscina comunitaria. Amueblado y listo para entrar a vivir.;REF-003
