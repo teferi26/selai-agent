@@ -20,7 +20,7 @@
     "expo": "~57.0.19",
     "expo-application": "~57.0.2",
     "expo-asset": "~57.0.16",
-    "expo-auth-session": "~57.0.11",
+    "expo-auth-session": "~58.0.17",
     "expo-audio": "~57.0.4",
     "expo-clipboard": "~57.0.1",
     "expo-constants": "~57.0.17",
